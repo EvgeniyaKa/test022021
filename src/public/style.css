@@ -435,6 +435,9 @@ h1, p {
         box-sizing: border-box;
         padding: 9px 9px 9px 9px;
     }
+    .header_logo {
+        margin-bottom: 10px;
+    }
 }
 @media all and (max-width: 375px) {
     .contacts_icon {
