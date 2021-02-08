@@ -1,8 +1,12 @@
 
+let webpack = require('webpack');
 let minCss = require ('mini-css-extract-plugin');
 let htmlPlugin = require ('html-webpack-plugin');
+let CopyWebpackPlugin = require ('copy-webpack-plugin'); 
+let path = require('path');
 
 module.exports = {
+    devtool: "source-map",
     devServer: {
         port: 3000,
         hot: true,
@@ -23,39 +27,55 @@ module.exports = {
                         options: {
                             publicPath: '../',
                             hmr: process.env.NODE_ENV === 'production',
+                            sourceMap: true,
                         },
                     },
-                    'css-loader'
+                    {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: true
+                        }
+                    },
                 ]
             },
             {
-                test: /\.(gif|png|jpe?g|svg)$/i,
-                use: ["file-loader?name=[name].[ext]&outputPath=images/&publicPath=images/",
-                "image-webpack-loader"]
-            },       
-            {
-                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                test: /\.(svg|eot|ttf|woff|woff2)$/,
                 use: [
-                    {
+                  {
                     loader: 'file-loader',
                     options: {
-                        name: '[name].[ext]',
-                        outputPath: 'fonts/'
+                      name: '[name].[ext]',
+                      outputPath: 'fonts/'
                     }
-                    }
+                  }
                 ]
-                }
-            
+              },
+              {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {
+                      name: '[name].[ext]'
+                    }
+                  }
+                ]
+              }     
         ]
     },
     plugins: [
         new minCss ({
-            filename: 'css/[name].css',
+            filename: 'style/[name].css',
             chunkFilename: '[id].css',
             ignoreOrder: false, 
         }),
         new htmlPlugin({
-            template: './src/public/index.html'
-          })
+            template: './src/public/index.html',
+            filename: "./index.html"
+          }),
+          new CopyWebpackPlugin([
+            { from: './src/public/img', to: './img' },
+            { from: './src/public/fonts', to: './fonts' },
+          ]) 
     ]
-}
+};
