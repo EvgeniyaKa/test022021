@@ -14,7 +14,6 @@
     src:  local('SF Pro Text'),
          url("font/SFUIText-Light.woff2") format("woff2"), 
          url("font/SFUIText-Light.woff") format("woff"),
-         url("font/FontsFree-Net-SFProText-Regular.ttf") format("ttf");
 }
 body,
 button,
