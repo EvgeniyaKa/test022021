@@ -470,14 +470,14 @@ h1, p {
         margin-top: 10px;
     }
 }
-@media all and (max-width: 330px) {
+@media all and (max-width: 340px) {
     .contacts_blok_write,
     .contacts_text_time,
     .nav_container {
         display: none;
     }
 }
-@media all and (min-width: 330px) {
+@media all and (min-width: 340px) {
     .contacts_320 {
         display: none;
     }
@@ -490,7 +490,7 @@ h1, p {
    display: flex;
    margin-left: 15px;
 }
-@media all and (min-width: 330px) {
+@media all and (min-width: 340px) {
     .nav_320 {
         display: none;
     }
